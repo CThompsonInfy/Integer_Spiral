@@ -39,15 +39,18 @@ public class IntegerSpiralServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String targetVal = request.getParameter("targetVal").trim();
+		boolean isSpiralRight = Boolean.valueOf(request.getParameter("spiralDir"));
 		//doGet(request, response);
 		
 		try {
-			String spiral = spiralWorker.createSpiral(targetVal, true);
+			String spiral = spiralWorker.createSpiral(targetVal, isSpiralRight);
 			request.setAttribute("spiral", spiral);
 		} catch(IllegalArgumentException ex) {
 			request.setAttribute("inputError", ex.getMessage());
+			ex.printStackTrace();
 		} catch(Exception ex) {
-			request.setAttribute("error", ex.getMessage());
+			request.setAttribute("error", String.format("%s: %s", ex.getClass().getName(), ex.getMessage()));
+			ex.printStackTrace();
 		}
 		
 		request.getRequestDispatcher("/").forward(request, response);

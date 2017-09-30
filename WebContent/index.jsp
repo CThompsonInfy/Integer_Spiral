@@ -8,13 +8,20 @@
 </head>
 <body>
 	<form id="spiralForm" method="post" action="DoSpiral">
-		<br />
-		<label for="targetVal" >Target Value:</label> <input id="targetVal" name="targetVal" type="text" value="${ param.targetVal }" />
+	<br />
+		<label for="targetVal" >Target Value:</label>
+		<input id="targetVal" name="targetVal" type="text" value="${ param.targetVal }" />
 		<span>${ requestScope.inputError }</span><br />
+		<br />
+		<label for="spiralDir" >Spiral Direction:</label><br />
+		<input id="spiralDirR" name="spiralDir" type="radio" value="True" ${param.spiralDir != 'False' ? 'checked' : ''} /> <label for="spiralDirR" >Right</label><br />
+		<input id="spiralDirL" name="spiralDir" type="radio" value="False" ${param.spiralDir == 'False' ? 'checked' : ''} /> <label for="spiralDirL" >Left</label><br />
+		<br />
 		<input type="submit" value="Do Spiral"/><br />
 		<span>${ requestScope.error }</span><br />
 	</form>
 	<hr />
+	<br />
 	<pre>${ requestScope.spiral }</pre>
 </body>
 </html>
